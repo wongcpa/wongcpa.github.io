@@ -1,0 +1,1280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jimmy Wong, CPA | Finance Systems &amp; AI Automation</title>
+<meta name="description" content="Jimmy Wong, CPA (WA &amp; Canada): finance systems, ERP implementation, and AI automation for accounting teams. Live demos of accounting tools.">
+<meta property="og:title" content="Jimmy Wong, CPA | Finance Systems &amp; AI Automation">
+<meta property="og:description" content="Finance systems, ERP implementation, and AI automation for accounting teams.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Crect width='200' height='200' rx='18' fill='%230F2A3D'/%3E%3Cpolyline points='44,100 74,146 112,60' fill='none' stroke='%23fff' stroke-width='18' stroke-linecap='square'/%3E%3Cpolyline points='90,100 120,146 158,60' fill='none' stroke='%23C9A45C' stroke-width='18' stroke-linecap='square'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink:       #0d0d0d;
+    --slate:     #0F2A3D;
+    --teal:      #7A5F2C;
+    --teal-lt:   #9A7A3E;
+    --sand:      #f5f0e8;
+    --paper:     #F6F6F4;
+    --muted:     #6b7280;
+    --rule:      #d1cdc4;
+    --mono:      'IBM Plex Mono', ui-monospace, monospace;
+    --serif:     'Sora', system-ui, sans-serif;
+    --sans:      'IBM Plex Sans', system-ui, sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.25rem 4rem;
+    background: rgba(246,246,244,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .nav-logo {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 1.05rem;
+    color: var(--slate);
+    letter-spacing: -0.01em;
+    text-decoration: none;
+  }
+  .nav-logo svg { border-radius: 4px; flex: none; }
+  .lang-label { font-family: var(--mono); font-size: 0.68rem; color: var(--muted); margin-right: 4px; letter-spacing: 0.06em; text-transform: uppercase; }
+
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--teal); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 8rem 4rem 4rem;
+    gap: 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -20%; right: -10%;
+    width: 55vw; height: 55vw;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(201,164,92,0.10) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-eyebrow {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 2rem;
+    height: 1px;
+    background: var(--teal);
+  }
+
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(2.8rem, 5vw, 4.5rem);
+    line-height: 1.1;
+    color: var(--slate);
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+
+  .hero h1 em {
+    font-style: normal;
+    color: var(--teal);
+  }
+
+  .hero-tagline {
+    font-size: 1.1rem;
+    color: var(--muted);
+    max-width: 480px;
+    line-height: 1.75;
+    margin-bottom: 2.5rem;
+    font-weight: 300;
+  }
+
+  .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.75rem;
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: all 0.2s;
+    cursor: pointer;
+    border: none;
+  }
+
+  .btn-primary {
+    background: var(--slate);
+    color: #fff;
+  }
+  .btn-primary:hover { background: #1B3D55; transform: translateY(-1px); }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--slate);
+    border: 1.5px solid var(--rule);
+  }
+  .btn-outline:hover { border-color: var(--teal); color: var(--teal); }
+
+  /* Hero right — stats panel */
+  .hero-stats {
+    display: grid;
+    grid-template-rows: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .stat-block {
+    background: var(--paper);
+    padding: 2rem 2.5rem;
+    transition: background 0.2s;
+  }
+  .stat-block:hover { background: var(--sand); }
+
+  .stat-num {
+    font-family: var(--serif);
+    font-size: 2.8rem;
+    color: var(--slate);
+    line-height: 1;
+    margin-bottom: 0.4rem;
+    font-weight: 700;
+  }
+  .stat-num span { color: var(--teal); }
+
+  .stat-label {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* ── SECTION COMMONS ── */
+  section { padding: 6rem 4rem; }
+
+  .section-header {
+    margin-bottom: 3.5rem;
+  }
+
+  .section-tag {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 0.75rem;
+  }
+
+  .section-title {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    color: var(--slate);
+    line-height: 1.2;
+    font-weight: 700;
+  }
+
+  /* ── ABOUT ── */
+  #about { background: var(--sand); }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.6fr;
+    gap: 5rem;
+    align-items: start;
+  }
+
+  .about-left {}
+
+  .about-identity {
+    font-family: var(--serif);
+    font-size: 1.4rem;
+    color: var(--slate);
+    margin-bottom: 2rem;
+    line-height: 1.4;
+    font-weight: 700;
+  }
+
+  .about-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .badge {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+    padding: 0.3rem 0.8rem;
+    border: 1px solid var(--teal);
+    color: var(--teal);
+    border-radius: 2px;
+    text-transform: uppercase;
+  }
+
+  .about-body { color: var(--muted); line-height: 1.85; font-weight: 300; }
+  .about-body p + p { margin-top: 1.25rem; }
+
+  .erp-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+    margin-top: 2rem;
+  }
+
+  .erp-cell {
+    background: var(--paper);
+    padding: 1rem;
+    text-align: center;
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.04em;
+    color: var(--slate);
+    font-weight: 500;
+    transition: background 0.2s, color 0.2s;
+  }
+  .erp-cell:hover { background: var(--teal); color: #fff; }
+
+  /* ── PROJECTS ── */
+  #projects { background: var(--paper); }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .project-card {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 3px;
+    padding: 2rem;
+    transition: box-shadow 0.25s, transform 0.25s, border-color 0.25s;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .project-card:hover {
+    box-shadow: 0 8px 32px rgba(15,42,61,0.10);
+    transform: translateY(-3px);
+    border-color: var(--teal);
+  }
+
+  .card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; }
+
+  .card-number {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    color: var(--teal);
+    letter-spacing: 0.1em;
+    opacity: 0.7;
+  }
+
+  .card-type {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.6rem;
+    background: var(--sand);
+    color: var(--muted);
+    border-radius: 1px;
+    white-space: nowrap;
+  }
+
+  .card-title {
+    font-family: var(--serif);
+    font-size: 1.2rem;
+    color: var(--slate);
+    line-height: 1.3;
+    font-weight: 700;
+  }
+
+  .card-desc {
+    font-size: 0.875rem;
+    color: var(--muted);
+    line-height: 1.7;
+    font-weight: 300;
+    flex: 1;
+  }
+
+  .card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .tag {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.04em;
+    padding: 0.2rem 0.55rem;
+    border: 1px solid var(--rule);
+    color: var(--muted);
+    border-radius: 1px;
+  }
+
+  .card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 1rem;
+    border-top: 1px solid var(--rule);
+  }
+
+  .card-link {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--teal);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    transition: gap 0.2s;
+  }
+  .card-link:hover { gap: 0.7rem; }
+
+  .privacy-badge {
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    color: #16a34a;
+    letter-spacing: 0.04em;
+    opacity: 0.75;
+  }
+
+  /* ── SKILLS ── */
+  #skills { background: var(--sand); }
+
+  .skills-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 3rem;
+  }
+
+  .skill-group h3 {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .skill-list { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+  .skill-list li {
+    font-size: 0.875rem;
+    color: var(--slate);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  .skill-list li::before {
+    content: '';
+    width: 4px; height: 4px;
+    border-radius: 50%;
+    background: var(--teal);
+    flex-shrink: 0;
+  }
+
+  /* ── CONTACT ── */
+  #contact {
+    background: var(--slate);
+    color: #fff;
+    text-align: center;
+  }
+
+  #contact .section-tag { color: var(--teal-lt); }
+  #contact .section-title { color: #fff; }
+
+  .contact-sub {
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.5);
+    margin: 1.5rem auto 3rem;
+    max-width: 500px;
+    line-height: 1.7;
+  }
+
+  .contact-links { display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; }
+
+  .contact-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.85rem 2rem;
+    border: 1px solid rgba(255,255,255,0.2);
+    color: rgba(255,255,255,0.8);
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: all 0.2s;
+  }
+  .contact-link:hover {
+    background: var(--teal);
+    border-color: var(--teal);
+    color: #fff;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--ink);
+    color: rgba(255,255,255,0.3);
+    text-align: center;
+    padding: 2rem 4rem;
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+  }
+
+  /* ── DIVIDER ── */
+  .rule-line {
+    width: 3rem;
+    height: 2px;
+    background: var(--teal);
+    margin: 1.25rem 0;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-content { animation: fadeUp 0.8s ease both; }
+  .hero-stats   { animation: fadeUp 0.8s ease 0.2s both; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { gap: 1.25rem; }
+    .hero, .about-grid { grid-template-columns: 1fr; }
+    .hero { padding: 7rem 1.5rem 3rem; }
+    section { padding: 4rem 1.5rem; }
+    .skills-layout { grid-template-columns: 1fr 1fr; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .erp-grid { grid-template-columns: repeat(2,1fr); }
+  }
+
+  @media (max-width: 600px) {
+    .nav-links { display: none; }
+    .skills-layout { grid-template-columns: 1fr; }
+    .erp-grid { grid-template-columns: repeat(2,1fr); }
+  }
+
+  /* ── GAME SECTION ── */
+  #game {
+    background: var(--slate);
+    color: #fff;
+    padding: 5rem 4rem;
+  }
+  #game .section-tag { color: var(--teal-lt); }
+  #game .section-title { color: #fff; margin-bottom: 0.5rem; }
+  #game .game-sub {
+    font-family: var(--mono);
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.45);
+    margin-bottom: 2.5rem;
+    letter-spacing: 0.04em;
+  }
+  .game-shell {
+    background: var(--paper);
+    border-radius: 6px;
+    padding: 2rem 2.5rem;
+    max-width: 780px;
+    margin: 0 auto;
+    color: var(--ink);
+  }
+  /* ── FLUX DETECTIVE INTERNALS ── */
+  #fd { font-family: var(--sans); }
+  #fd h2 { font-size: 1.1rem; font-weight: 700; margin: 0 0 4px; color: var(--slate); }
+  #fd .sub { font-size: 0.8rem; color: var(--muted); margin: 0 0 1.25rem; }
+  #fd .report { border: 1px solid var(--rule); border-radius: 4px; overflow: hidden; margin-bottom: 1rem; }
+  #fd .rhead { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; background: var(--sand); padding: 8px 14px; font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+  #fd .rrow { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; padding: 9px 14px; font-size: 0.82rem; border-top: 1px solid var(--rule); cursor: pointer; transition: background 0.15s; color: var(--ink); }
+  #fd .rrow:hover { background: var(--sand); }
+  #fd .rrow.correct { background: #dcfce7; }
+  #fd .rrow.wrong { background: #fee2e2; }
+  #fd .rrow.revealed { background: #dcfce7; }
+  #fd .neg { color: #dc2626; font-weight: 500; }
+  #fd .pos { color: #16a34a; font-weight: 500; }
+  #fd .gstats { display: flex; gap: 10px; margin-bottom: 1.25rem; }
+  #fd .gstat { flex: 1; background: var(--sand); border-radius: 3px; padding: 10px 14px; border: 1px solid var(--rule); }
+  #fd .gstat-l { font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 2px; }
+  #fd .gstat-v { font-family: var(--serif); font-size: 1.5rem; color: var(--slate); font-weight: 700; }
+  #fd .timer-warn { color: #dc2626 !important; }
+  #fd .gmsg { border-radius: 3px; padding: 10px 14px; font-size: 0.8rem; margin-bottom: 1rem; display: none; line-height: 1.55; }
+  #fd .gmsg-ok { background: #dcfce7; color: #15803d; }
+  #fd .gmsg-err { background: #fee2e2; color: #dc2626; }
+  #fd .gmsg-info { background: #e0f2fe; color: #0369a1; }
+  #fd .gbtn { padding: 8px 18px; font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.05em; text-transform: uppercase; border: 1.5px solid var(--rule); border-radius: 2px; cursor: pointer; background: var(--paper); color: var(--slate); transition: all 0.15s; }
+  #fd .gbtn:hover { border-color: var(--teal); color: var(--teal); }
+  #fd .gbtn-primary { background: var(--teal); color: #fff; border-color: var(--teal); }
+  #fd .gbtn-primary:hover { background: var(--teal-lt); border-color: var(--teal-lt); }
+  #fd .hint-btn { font-family: var(--mono); font-size: 0.7rem; color: var(--muted); background: none; border: none; cursor: pointer; text-decoration: underline; padding: 0; letter-spacing: 0.04em; }
+  #fd .hint-btn:hover { color: var(--slate); }
+  #fd .level-badge { font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.08em; padding: 3px 8px; border-radius: 2px; background: var(--sand); color: var(--muted); border: 1px solid var(--rule); text-transform: uppercase; }
+  #fd .bottom { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-top: 10px; }
+  #fd .anomaly-note { font-family: var(--mono); font-size: 0.72rem; color: var(--muted); font-style: italic; margin-top: 6px; }
+  #fd .end-card { border: 1px solid var(--rule); border-radius: 4px; padding: 2.5rem; text-align: center; display: none; }
+  #fd .end-card p { color: var(--muted); font-size: 0.875rem; margin: 8px 0 1.5rem; line-height: 1.65; }
+  #fd .score-final { font-family: var(--serif); font-size: 3rem; font-weight: 700; color: var(--slate); }
+  #fd .cfо-bar { display: flex; align-items: center; gap: 8px; margin-bottom: 1.25rem; }
+  #fd .cfо-label { font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
+  #fd .cfо-track { flex: 1; height: 6px; background: var(--rule); border-radius: 3px; overflow: hidden; }
+  #fd .cfо-fill { height: 100%; background: var(--teal); border-radius: 3px; transition: width 1s linear; }
+  #fd .cfо-fill.danger { background: #dc2626; }
+  @media (max-width: 600px) {
+    #game { padding: 4rem 1.5rem; }
+    .game-shell { padding: 1.25rem; }
+    #fd .gstats { flex-wrap: wrap; }
+    #fd .gstat { min-width: calc(50% - 5px); }
+  }
+
+
+  /* ── LANGUAGE SWITCHER ── */
+  .lang-switcher {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-left: 1.5rem;
+  }
+  .lang-btn {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    padding: 3px 7px;
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.15s;
+    letter-spacing: 0.04em;
+  }
+  .lang-btn:hover { border-color: var(--teal); color: var(--teal); }
+  .lang-btn.active { background: var(--slate); color: #fff; border-color: var(--slate); }
+  @media (max-width: 900px) { nav { flex-wrap: wrap; row-gap: 0.6rem; } .lang-switcher { margin-left: 0; width: 100%; flex-wrap: wrap; } .hero { padding-top: 10rem; } }
+
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo"><svg viewBox="0 0 200 200" width="30" height="30" aria-hidden="true"><rect width="200" height="200" rx="14" fill="#0F2A3D"/><polyline points="45,96 75,140 111,60" fill="none" stroke="#fff" stroke-width="12" stroke-linecap="square"/><polyline points="89,96 119,140 155,60" fill="none" stroke="#C9A45C" stroke-width="12" stroke-linecap="square"/></svg><span>Jimmy Wong</span></a>
+  <ul class="nav-links">
+    <li><a href="#about" data-i18n="nav_about">About</a></li>
+    <li><a href="#projects" data-i18n="nav_projects">Projects</a></li>
+    <li><a href="#skills" data-i18n="nav_skills">Skills</a></li>
+    <li><a href="#game" style="color: var(--teal);" data-i18n="nav_game">Game</a></li>
+    <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
+  </ul>
+  <div class="lang-switcher">
+    <button class="lang-btn active" data-lang="en" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" data-lang="zh" onclick="setLang('zh')" title="简体中文">简体</button>
+    <button class="lang-btn" data-lang="zht" onclick="setLang('zht')" title="繁體中文">繁體</button>
+    <button class="lang-btn" data-lang="ja" onclick="setLang('ja')">日本語</button>
+    <button class="lang-btn" data-lang="es" onclick="setLang('es')" title="Español (España)">ES</button>
+    <button class="lang-btn" data-lang="it" onclick="setLang('it')">IT</button>
+    <button class="lang-btn" data-lang="fr" onclick="setLang('fr')">FR</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-content">
+    <div class="hero-eyebrow" data-i18n="hero_eyebrow">Finance Systems · AI Automation · ERP</div>
+    <h1 data-i18n="hero_h1">Finance systems,<br>built to be<br><em>trusted.</em></h1>
+    <p class="hero-tagline" data-i18n="hero_tag">CPA (WA &amp; Canada) building finance systems and AI automation for accounting teams: ERP implementations, financial data pipelines, and tools that take the manual work out of close.</p>
+    <div class="hero-ctas">
+      <a href="#projects" class="btn btn-primary" data-i18n="cta_projects">View projects ↓</a>
+      <a href="https://github.com/wongcpa" class="btn btn-outline" target="_blank" rel="noopener">GitHub →</a>
+    </div>
+  </div>
+
+  <div class="hero-stats">
+    <div class="stat-block">
+      <div class="stat-num">10<span>+</span></div>
+      <div class="stat-label" data-i18n="stat1">Years across public accounting, Fortune 500, and tech finance</div>
+    </div>
+    <div class="stat-block">
+      <div class="stat-num">6</div>
+      <div class="stat-label" data-i18n="stat2">ERP platforms: Oracle, SAP S/4HANA, Workday, NetSuite, Model N, Xero</div>
+    </div>
+    <div class="stat-block">
+      <div class="stat-num">7</div>
+      <div class="stat-label" data-i18n="stat3">Working languages: English, 中文 (Cantonese &amp; Mandarin), 日本語, Español, Italiano, Français</div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid">
+    <div class="about-left">
+      <div class="section-tag" data-i18n="about_tag">// About</div>
+      <div class="about-identity" data-i18n="about_identity">CPA who builds finance systems.</div>
+      <div class="rule-line"></div>
+      <div class="about-badges">
+        <span class="badge">CPA (WA & Canada)</span>
+        <span class="badge">IFRS 15</span>
+        <span class="badge">ASC 606</span>
+        <span class="badge">ASPE 3400</span>
+        <span class="badge">Python</span>
+        <span class="badge">AI Automation</span>
+        <span class="badge">ERP Implementation</span>
+        <span class="badge">7 Languages</span>
+      </div>
+      <div class="erp-grid">
+        <div class="erp-cell">Xero</div>
+        <div class="erp-cell">NetSuite</div>
+        <div class="erp-cell">SAP S/4</div>
+        <div class="erp-cell">Oracle Fusion</div>
+        <div class="erp-cell">Workday</div>
+        <div class="erp-cell">QBO</div>
+        <div class="erp-cell">Model N</div>
+        <div class="erp-cell">Claude AI</div>
+        <div class="erp-cell">Copilot</div>
+        <div class="erp-cell">ChatGPT</div>
+        <div class="erp-cell">Power BI</div>
+        <div class="erp-cell">Python</div>
+      </div>
+    </div>
+    <div class="about-body">
+      <p>
+        <span data-i18n="about_p1">Dual-licensed CPA (Washington, USA and Canada) working where accounting, systems, and AI meet: designing ERP processes, building data and automation tools, and using AI to speed up close, reconciliation, and analysis, with CPA-level judgment and controls on every output.</span>
+      </p>
+      <p>
+        <span data-i18n="about_p2">Experience spans a <strong>global data storage company</strong> (revenue accounting, Oracle and Model N ERP transitions, SOX through a company separation), <strong>Amazon</strong> (Twitch content accounting, SAP S/4HANA and NetSuite implementation testing), <strong>Zipline</strong> (SaaS finance operations, close design, AI-assisted forecasting), <strong>Zillow</strong> and <strong>DaVita</strong> (corporate accounting consulting), and <strong>Crowe MacKay LLP</strong> (audit and CPA mentorship).</span>
+      </p>
+      <p>
+        <span data-i18n="about_p3">Focus: <strong>finance systems and automation</strong>, where ERP design, data quality, and controls decide whether the numbers can be trusted. A rare combination of CPA technical depth, multi-ERP implementation experience, and practical AI fluency that turns weeks of manual work into hours.</span>
+      </p>
+      <p>
+        <span data-i18n="about_p4">Open to Finance Systems, Finance Transformation, ERP Implementation, and Finance AI/Automation roles, in-house or with Big 4 advisory and implementation partners. Remote preferred, with particular interest in global teams where languages matter.</span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-header">
+    <div class="section-tag" data-i18n="projects_tag">// Projects</div>
+    <h2 class="section-title" data-i18n="projects_title">AI-Assisted Accounting Tools<br>Built for Real Workflows</h2>
+  </div>
+
+  <div class="projects-grid">
+
+    <!-- Card 1 -->
+    <div class="project-card">
+      <div class="card-top">
+        <span class="card-number">01</span>
+        <span class="card-type">Consolidation</span>
+      </div>
+      <div class="card-title">Multi-Entity Financial Consolidation</div>
+      <div class="card-desc">
+        Consolidates P&L and Balance Sheet across 3 entities (USD, CAD, GBP) with FX translation
+        (IAS 21), intercompany elimination, and a single-command consolidated trial balance export.
+        Built for Xero multi-entity month-end close.
+      </div>
+      <div class="card-tags">
+        <span class="tag">Xero</span>
+        <span class="tag">FX Translation</span>
+        <span class="tag">IFRS 10</span>
+        <span class="tag">IC Elimination</span>
+        <span class="tag">Python</span>
+      </div>
+      <div class="card-footer">
+        <a href="https://github.com/wongcpa/fx-consolidation-engine" class="card-link" target="_blank" rel="noopener">View on GitHub →</a>
+        <span class="privacy-badge">● 100% Offline</span>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="project-card">
+      <div class="card-top">
+        <span class="card-number">02</span>
+        <span class="card-type">Bookkeeping</span>
+      </div>
+      <div class="card-title">Bank Statement Expense Categorizer</div>
+      <div class="card-desc">
+        Ingests CSV bank exports, categorizes transactions using a regex keyword engine against
+        14 CRA expense categories (T2125), applies the 50% meals rule (ITA s.67.1), and flags
+        uncategorized items for manual review.
+      </div>
+      <div class="card-tags">
+        <span class="tag">CRA T2125</span>
+        <span class="tag">ITA s.67.1</span>
+        <span class="tag">Healthcare</span>
+        <span class="tag">Sole Prop</span>
+        <span class="tag">Python</span>
+      </div>
+      <div class="card-footer">
+        <a href="https://github.com/wongcpa/cra-expense-categorizer" class="card-link" target="_blank" rel="noopener">View on GitHub →</a>
+        <span class="privacy-badge">● 100% Offline</span>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="project-card">
+      <div class="card-top">
+        <span class="card-number">03</span>
+        <span class="card-type">Revenue Analytics</span>
+      </div>
+      <div class="card-title">Contra Revenue Flux Analyzer</div>
+      <div class="card-desc">
+        MoM and QoQ variance analysis on gross-to-net revenue components (rebates, SPAs,
+        returns, price protection) with a Model N anomaly detection engine that flags
+        system-driven calculation errors vs. true business changes.
+      </div>
+      <div class="card-tags">
+        <span class="tag">Model N</span>
+        <span class="tag">ASC 606</span>
+        <span class="tag">Semiconductor</span>
+        <span class="tag">SAP</span>
+        <span class="tag">Python</span>
+      </div>
+      <div class="card-footer">
+        <a href="https://github.com/wongcpa/contra-revenue-flux-analyzer" class="card-link" target="_blank" rel="noopener">View on GitHub →</a>
+        <span class="privacy-badge">● 100% Offline</span>
+      </div>
+    </div>
+
+    <!-- Card 4 -->
+    <div class="project-card">
+      <div class="card-top">
+        <span class="card-number">04</span>
+        <span class="card-type">Contract Review</span>
+      </div>
+      <div class="card-title">Contract Revenue Recognition Reviewer</div>
+      <div class="card-desc">
+        Parses PDF contracts locally to flag unusual revenue terms against IFRS 15's
+        five-step model and ASPE 3400. Detects variable consideration, principal/agent
+        indicators, significant financing components, and content licensing risks.
+      </div>
+      <div class="card-tags">
+        <span class="tag">IFRS 15</span>
+        <span class="tag">ASPE 3400</span>
+        <span class="tag">Streaming</span>
+        <span class="tag">Media</span>
+        <span class="tag">Python + pdfplumber</span>
+      </div>
+      <div class="card-footer">
+        <a href="https://github.com/wongcpa/ifrs15-contract-reviewer" class="card-link" target="_blank" rel="noopener">View on GitHub →</a>
+        <span class="privacy-badge">● Local PDF Only</span>
+      </div>
+    </div>
+
+    <!-- Card 5a -->
+    <div class="project-card">
+      <div class="card-top">
+        <span class="card-number">05a</span>
+        <span class="card-type">ERP Migration</span>
+      </div>
+      <div class="card-title">GL Mapping Validator: NetSuite → SAP</div>
+      <div class="card-desc">
+        Validates a full chart of accounts mapping from NetSuite to SAP S/4HANA.
+        Flags type mismatches (B/S vs. P&L), duplicate targets, inactive accounts,
+        and unmapped actives. Produces a migration-ready CSV report.
+      </div>
+      <div class="card-tags">
+        <span class="tag">NetSuite</span>
+        <span class="tag">SAP S/4HANA</span>
+        <span class="tag">COA Migration</span>
+        <span class="tag">Python</span>
+      </div>
+      <div class="card-footer">
+        <a href="https://github.com/wongcpa/gl-migration-validator-suite" class="card-link" target="_blank" rel="noopener">View on GitHub →</a>
+        <span class="privacy-badge">● 100% Offline</span>
+      </div>
+    </div>
+
+    <!-- Card 5b -->
+    <div class="project-card">
+      <div class="card-top">
+        <span class="card-number">05b</span>
+        <span class="card-type">ERP Migration</span>
+      </div>
+      <div class="card-title">GL Mapping Validator: Xero → NetSuite</div>
+      <div class="card-desc">
+        Maps Xero account codes and types to NetSuite's classification structure.
+        Handles Xero-specific account types (BANK, CURRLIAB, DEPRECIATN, OVERHEADS)
+        and flags duplicate Xero codes and inactive accounts.
+      </div>
+      <div class="card-tags">
+        <span class="tag">Xero</span>
+        <span class="tag">NetSuite</span>
+        <span class="tag">SaaS Startup</span>
+        <span class="tag">Python</span>
+      </div>
+      <div class="card-footer">
+        <a href="https://github.com/wongcpa/gl-migration-validator-suite" class="card-link" target="_blank" rel="noopener">View on GitHub →</a>
+        <span class="privacy-badge">● 100% Offline</span>
+      </div>
+    </div>
+
+    <!-- Card 5c -->
+    <div class="project-card">
+      <div class="card-top">
+        <span class="card-number">05c</span>
+        <span class="card-type">ERP Migration</span>
+      </div>
+      <div class="card-title">GL Mapping Validator: SAP → Oracle Fusion</div>
+      <div class="card-desc">
+        Maps SAP GL accounts (X/P type codes) to Oracle Fusion Cloud's segment-qualified
+        account structure. Validates type compatibility and flags contra revenue accounts
+        mapped to gross revenue targets.
+      </div>
+      <div class="card-tags">
+        <span class="tag">SAP S/4HANA</span>
+        <span class="tag">Oracle Fusion</span>
+        <span class="tag">Semiconductor</span>
+        <span class="tag">Python</span>
+      </div>
+      <div class="card-footer">
+        <a href="https://github.com/wongcpa/gl-migration-validator-suite" class="card-link" target="_blank" rel="noopener">View on GitHub →</a>
+        <span class="privacy-badge">● 100% Offline</span>
+      </div>
+    </div>
+
+    <!-- Card 5d -->
+    <div class="project-card">
+      <div class="card-top">
+        <span class="card-number">05d</span>
+        <span class="card-type">ERP Migration</span>
+      </div>
+      <div class="card-title">GL Mapping Validator: Workday → NetSuite</div>
+      <div class="card-desc">
+        Validates Workday worktag-based account structures against NetSuite's traditional
+        GL account hierarchy. Handles Workday's dimension-driven approach vs. NetSuite's
+        segment model.
+      </div>
+      <div class="card-tags">
+        <span class="tag">Workday</span>
+        <span class="tag">NetSuite</span>
+        <span class="tag">Enterprise</span>
+        <span class="tag">Python</span>
+      </div>
+      <div class="card-footer">
+        <a href="https://github.com/wongcpa/gl-migration-validator-suite" class="card-link" target="_blank" rel="noopener">View on GitHub →</a>
+        <span class="privacy-badge">● 100% Offline</span>
+      </div>
+    </div>
+
+    <!-- Card 5e -->
+    <div class="project-card">
+      <div class="card-top">
+        <span class="card-number">05e</span>
+        <span class="card-type">ERP Migration</span>
+      </div>
+      <div class="card-title">GL Mapping Validator: QBO → NetSuite</div>
+      <div class="card-desc">
+        Maps QuickBooks Online's account structure to NetSuite for growing businesses
+        transitioning from SMB to enterprise. Flags Opening Balance Equity reclassification
+        needs and uncategorized expense accounts.
+      </div>
+      <div class="card-tags">
+        <span class="tag">QuickBooks Online</span>
+        <span class="tag">NetSuite</span>
+        <span class="tag">SMB Growth</span>
+        <span class="tag">Python</span>
+      </div>
+      <div class="card-footer">
+        <a href="https://github.com/wongcpa/gl-migration-validator-suite" class="card-link" target="_blank" rel="noopener">View on GitHub →</a>
+        <span class="privacy-badge">● 100% Offline</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-header">
+    <div class="section-tag" data-i18n="skills_tag">// Skills</div>
+    <h2 class="section-title" data-i18n="skills_title">Expertise</h2>
+  </div>
+  <div class="skills-layout">
+    <div class="skill-group">
+      <h3>ERP Systems</h3>
+      <ul class="skill-list">
+        <li>SAP S/4HANA & SAP BPC</li>
+        <li>Oracle Fusion Cloud</li>
+        <li>NetSuite</li>
+        <li>Xero (multi-entity)</li>
+        <li>QuickBooks Online</li>
+        <li>Workday Financials</li>
+        <li>Model N (channel pricing)</li>
+      </ul>
+    </div>
+    <div class="skill-group">
+      <h3>Accounting Specialties</h3>
+      <ul class="skill-list">
+        <li>Revenue Recognition (IFRS 15 / ASC 606 / ASPE 3400)</li>
+        <li>Contra Revenue & Gross-to-Net Analysis</li>
+        <li>AI-Assisted Process Improvement & Automation</li>
+        <li>Multi-entity Consolidation (IAS 21)</li>
+        <li>SOX Compliance & Internal Controls</li>
+        <li>Content Asset & Streaming Accounting</li>
+        <li>ERP GL Migration & Chart of Accounts Design</li>
+        <li>Forecasting, Budgeting & Variance Analysis</li>
+        <li>CRA Tax Compliance (T2125 / T2)</li>
+      </ul>
+    </div>
+    <div class="skill-group">
+      <h3>Technical & AI</h3>
+      <ul class="skill-list">
+        <li>AI Tools — Claude, Copilot, ChatGPT, Gemini</li>
+        <li>Python (automation, data processing)</li>
+        <li>SQL (custom queries, large datasets)</li>
+        <li>Excel / Power Query / Power BI / Tableau</li>
+        <li>GitHub (version control)</li>
+        <li>pdfplumber (local PDF parsing)</li>
+        <li>Process documentation & AI-assisted workflow design</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+
+<!-- GAME -->
+<section id="game">
+  <div class="section-tag" data-i18n="game_tag">// Flux Detective</div>
+  <h2 class="section-title" data-i18n="game_title">Can You Spot<br>the Anomaly?</h2>
+  <p class="game-sub" data-i18n="game_sub">Real accounting scenarios. Timed. The CFO is watching.</p>
+
+  <div class="game-shell">
+    <div id="fd">
+      <div class="gstats">
+        <div class="gstat"><div class="gstat-l">Score</div><div class="gstat-v" id="score">0</div></div>
+        <div class="gstat"><div class="gstat-l">Round</div><div class="gstat-v" id="round-num">1/6</div></div>
+        <div class="gstat"><div class="gstat-l">Time left</div><div class="gstat-v" id="timer">25s</div></div>
+        <div class="gstat"><div class="gstat-l">Streak</div><div class="gstat-v" id="streak">0</div></div>
+      </div>
+
+      <div class="cfо-bar">
+        <span class="cfо-label">CFO patience</span>
+        <div class="cfо-track"><div class="cfо-fill" id="cfo-fill" style="width:100%"></div></div>
+        <span class="cfо-label" id="cfo-emoji">&#128054;</span>
+      </div>
+
+      <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px;">
+        <span class="level-badge" id="level-badge">Level: Analyst</span>
+        <span style="font-family:var(--mono);font-size:0.72rem;color:var(--muted);" id="round-label"></span>
+      </div>
+
+      <div id="msg-ok" class="gmsg gmsg-ok"></div>
+      <div id="msg-err" class="gmsg gmsg-err"></div>
+      <div id="msg-info" class="gmsg gmsg-info"></div>
+
+      <div class="report" id="report-wrap">
+        <div class="rhead">
+          <div>GL Account</div><div style="text-align:right">Prior Mo.</div><div style="text-align:right">Current Mo.</div><div style="text-align:right">Variance %</div>
+        </div>
+        <div id="report-rows"></div>
+      </div>
+
+      <div id="anomaly-note" class="anomaly-note"></div>
+
+      <div class="bottom">
+        <button class="hint-btn" id="hint-btn" onclick="useHint()">Use hint (−5 pts)</button>
+        <span style="flex:1"></span>
+        <button class="gbtn" onclick="skipRound()">Skip</button>
+      </div>
+
+      <div class="end-card" id="end-card">
+        <div style="font-family:var(--mono);font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:4px;">Final Score</div>
+        <div class="score-final" id="final-score">0</div>
+        <p id="end-msg"></p>
+        <button class="gbtn gbtn-primary" onclick="startGame()">Play Again</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+(function(){
+const ROUNDS=[{level:"Analyst",time:25,label:"Identify the account with an unusual MoM swing",rows:[{acct:"4000 — Product Revenue",prior:18420,curr:19100},{acct:"4100 — Service Revenue",prior:6200,curr:6450},{acct:"4900 — Contra Rev — Rebates",prior:1820,curr:1950},{acct:"5000 — Cost of Revenue",prior:7800,curr:8100},{acct:"5100 — Mfg Overhead",prior:2100,curr:9800,anomaly:true},{acct:"6000 — Salaries & Wages",prior:4200,curr:4350},{acct:"6100 — Rent & Occupancy",prior:1500,curr:1500}],explanation:"Mfg Overhead jumped 367% with no corresponding revenue increase — classic Model N batch error or misposted accrual."},{level:"Analyst",time:22,label:"One contra-revenue line moved in the wrong direction",rows:[{acct:"4000 — Product Revenue",prior:22100,curr:24600},{acct:"4100 — Service Revenue",prior:5800,curr:6100},{acct:"4900 — Rebates & Incentives",prior:2100,curr:1050,anomaly:true},{acct:"4901 — Price Protection",prior:980,curr:1020},{acct:"4902 — Returns & Allowances",prior:650,curr:710},{acct:"5000 — Cost of Revenue",prior:9200,curr:10100},{acct:"6000 — Salaries & Wages",prior:4400,curr:4550}],explanation:"Rebates & Incentives dropped 50% as revenue grew 11%. Contra revenue should scale with revenue — this suggests a reserve underaccrual or system miscalculation."},{level:"Senior",time:20,label:"Revenue grew, but something in COGS doesn't add up",rows:[{acct:"4000 — Product Revenue",prior:31000,curr:38000},{acct:"4100 — Service Revenue",prior:7200,curr:7600},{acct:"4900 — SPA Contra Revenue",prior:3100,curr:3900},{acct:"5000 — Cost of Revenue",prior:12800,curr:13400},{acct:"5100 — Royalty Expense",prior:1900,curr:1920},{acct:"5200 — Content Amortization",prior:4200,curr:14700,anomaly:true},{acct:"6200 — G&A Expense",prior:2100,curr:2180}],explanation:"Content Amortization jumped 250% while revenue grew 23%. Likely a bulk amortization catch-up posting or ERP migration cutover error."},{level:"Senior",time:18,label:"Spot the account that moved against the trend",rows:[{acct:"4000 — Streaming Revenue",prior:15200,curr:14100},{acct:"4100 — Licensing Revenue",prior:8900,curr:8200},{acct:"4900 — Variable Consideration",prior:1400,curr:1310},{acct:"5000 — Content Costs",prior:9800,curr:9100},{acct:"6000 — Headcount",prior:5200,curr:5350,anomaly:true},{acct:"6100 — Tech & Infrastructure",prior:2800,curr:2600},{acct:"6300 — Professional Fees",prior:1100,curr:1020}],explanation:"Everything declined MoM but Headcount expense increased. Likely a payroll true-up or bonus accrual hitting the wrong period."},{level:"Manager",time:16,label:"One line is statistically impossible given the business context",rows:[{acct:"4000 — Product Revenue",prior:44200,curr:45100},{acct:"4900 — Rebates",prior:3800,curr:3870},{acct:"4901 — Price Protection",prior:1200,curr:1230},{acct:"4902 — Ship & Debit",prior:980,curr:1010},{acct:"4903 — SPA Adjustments",prior:2100,curr:-1850,anomaly:true},{acct:"5000 — COGS",prior:18400,curr:18800},{acct:"6000 — Opex",prior:9200,curr:9300}],explanation:"SPA Adjustments flipped from a debit to a credit balance — a sign flip in a contra revenue account. Clear GL mapping error from an ERP migration cutover."},{level:"Manager",time:14,label:"Final round — spot the one real anomaly",rows:[{acct:"4000 — Revenue",prior:52000,curr:58000},{acct:"4900 — Contra Revenue",prior:5200,curr:5800},{acct:"5000 — COGS",prior:21000,curr:23400},{acct:"6000 — R&D Expense",prior:6800,curr:7200},{acct:"6100 — S&M Expense",prior:4900,curr:7900,anomaly:true},{acct:"6200 — G&A Expense",prior:2800,curr:3100},{acct:"7000 — Interest Income",prior:340,curr:290}],explanation:"S&M Expense jumped 61% while revenue grew 12% and all other opex grew proportionally — likely a misposted commission batch or accrual hitting the wrong period."}];
+
+let current=0,score=0,streak=0,timerInterval=null,timeLeft=0,hintUsed=false,roundDone=false;
+
+function fmt(n){return'$'+Math.abs(n).toLocaleString();}
+function pct(p,c){if(p===0)return'N/A';const v=((c-p)/Math.abs(p))*100;return(v>=0?'+':'')+v.toFixed(1)+'%';}
+function pctCls(p,c){const v=((c-p)/Math.abs(p))*100;return Math.abs(v)>30?(v>0?'pos':'neg'):'';}
+
+function updateCFO(pct){
+  const fill=document.getElementById('cfo-fill');
+  const em=document.getElementById('cfo-emoji');
+  fill.style.width=pct+'%';
+  if(pct>60){fill.className='cfо-fill';em.textContent='😐';}
+  else if(pct>30){fill.className='cfо-fill danger';em.textContent='😤';}
+  else{fill.className='cfо-fill danger';em.textContent='😡';}
+}
+
+function renderRound(){
+  roundDone=false;hintUsed=false;
+  const r=ROUNDS[current];
+  document.getElementById('round-num').textContent=(current+1)+'/'+ROUNDS.length;
+  document.getElementById('level-badge').textContent='Level: '+r.level;
+  document.getElementById('round-label').textContent=r.label;
+  document.getElementById('anomaly-note').textContent='';
+  ['ok','err','info'].forEach(t=>{document.getElementById('msg-'+t).style.display='none';});
+  const hb=document.getElementById('hint-btn');
+  hb.style.opacity='1';hb.disabled=false;
+  updateCFO(100);
+  document.getElementById('cfo-emoji').textContent='😐';
+
+  const rows=[...r.rows].sort(()=>Math.random()-0.5);
+  const wrap=document.getElementById('report-rows');
+  wrap.innerHTML='';
+  rows.forEach(row=>{
+    const div=document.createElement('div');
+    div.className='rrow';
+    div.dataset.anomaly=row.anomaly||false;
+    const pc=pct(row.prior,row.curr);
+    const cls=pctCls(row.prior,row.curr);
+    div.innerHTML='<div>'+row.acct+'</div><div style="text-align:right">'+fmt(row.prior)+'</div><div style="text-align:right">'+fmt(row.curr)+'</div><div style="text-align:right" class="'+cls+'">'+pc+'</div>';
+    div.addEventListener('click',()=>pick(div,row.anomaly||false));
+    wrap.appendChild(div);
+  });
+  startTimer(r.time);
+}
+
+function startTimer(secs){
+  clearInterval(timerInterval);
+  timeLeft=secs;
+  document.getElementById('timer').textContent=timeLeft+'s';
+  document.getElementById('timer').className='gstat-v';
+  timerInterval=setInterval(()=>{
+    timeLeft--;
+    document.getElementById('timer').textContent=timeLeft+'s';
+    const pctLeft=Math.round((timeLeft/secs)*100);
+    updateCFO(pctLeft);
+    if(timeLeft<=8)document.getElementById('timer').className='gstat-v timer-warn';
+    if(timeLeft<=0){clearInterval(timerInterval);timeExpired();}
+  },1000);
+}
+
+function timeExpired(){
+  if(roundDone)return;
+  roundDone=true;streak=0;updateStreak();
+  const r=ROUNDS[current];
+  showMsg('err',"Time's up! The CFO noticed. "+r.explanation);
+  revealAnomaly();
+  document.getElementById('anomaly-note').textContent='Anomaly: '+r.rows.find(x=>x.anomaly).acct;
+  document.getElementById('cfo-emoji').textContent='😡';
+  setTimeout(nextRound,3400);
+}
+
+function pick(div,isAnomaly){
+  if(roundDone)return;
+  roundDone=true;clearInterval(timerInterval);
+  const r=ROUNDS[current];
+  const timeBonus=Math.floor(timeLeft/5);
+  if(isAnomaly){
+    const pts=10+timeBonus+(hintUsed?0:2);
+    score+=pts;streak++;
+    updateScore();updateStreak();
+    div.classList.add('correct');
+    const bonusNote=streak>1?' (+'+streak+'x streak!)':'';
+    showMsg('ok','Caught it! +'+pts+' pts'+bonusNote+' — '+r.explanation);
+    document.getElementById('cfo-emoji').textContent='😌';
+  } else {
+    streak=0;updateStreak();
+    div.classList.add('wrong');
+    revealAnomaly();
+    showMsg('err','Not quite. The real anomaly is highlighted. '+r.explanation);
+    document.getElementById('anomaly-note').textContent='Anomaly: '+r.rows.find(x=>x.anomaly).acct;
+    document.getElementById('cfo-emoji').textContent='😡';
+  }
+  setTimeout(nextRound,3200);
+}
+
+function revealAnomaly(){
+  document.querySelectorAll('.rrow').forEach(row=>{
+    if(row.dataset.anomaly==='true')row.classList.add('revealed');
+  });
+}
+
+function showMsg(type,text){
+  const el=document.getElementById('msg-'+type);
+  el.textContent=text;el.style.display='block';
+}
+
+function updateScore(){document.getElementById('score').textContent=score;}
+function updateStreak(){document.getElementById('streak').textContent=streak;}
+
+window.useHint=function(){
+  if(hintUsed||roundDone)return;
+  hintUsed=true;score=Math.max(0,score-5);updateScore();
+  const hb=document.getElementById('hint-btn');hb.disabled=true;hb.style.opacity='0.4';
+  const r=ROUNDS[current];
+  const anomalyRow=r.rows.find(x=>x.anomaly);
+  const pc=pct(anomalyRow.prior,anomalyRow.curr);
+  showMsg('info','Hint: Look for the account with a '+Math.abs(parseFloat(pc)).toFixed(0)+'% swing that doesn\'t fit the narrative. (−5 pts)');
+};
+
+window.skipRound=function(){
+  if(roundDone)return;
+  roundDone=true;clearInterval(timerInterval);
+  streak=0;updateStreak();
+  const r=ROUNDS[current];
+  showMsg('info','Skipped. '+r.explanation);
+  revealAnomaly();
+  setTimeout(nextRound,3000);
+};
+
+function nextRound(){
+  current++;
+  if(current>=ROUNDS.length){endGame();return;}
+  renderRound();
+}
+
+function endGame(){
+  document.getElementById('report-wrap').style.display='none';
+  document.getElementById('anomaly-note').textContent='';
+  ['ok','err','info'].forEach(t=>{document.getElementById('msg-'+t).style.display='none';});
+  document.querySelector('#fd .bottom').style.display='none';
+  document.getElementById('level-info') && (document.getElementById('level-info').style.display='none');
+  const maxPts=ROUNDS.length*14;
+  const p=Math.round((score/maxPts)*100);
+  let msg='';
+  if(p>=80)msg='Outstanding. You spotted patterns like a seasoned revenue accounting manager. The CFO is impressed.';
+  else if(p>=55)msg='Solid work. You caught the big ones — a few slipped by under time pressure.';
+  else if(p>=30)msg='Good start. The anomalies get subtler at Manager level — keep practicing.';
+  else msg='The CFO is not impressed. But every audit starts somewhere.';
+  document.getElementById('final-score').textContent=score+' pts';
+  document.getElementById('end-msg').textContent=msg;
+  document.getElementById('end-card').style.display='block';
+}
+
+window.startGame=function(){
+  current=0;score=0;streak=0;
+  updateScore();updateStreak();clearInterval(timerInterval);
+  document.getElementById('report-wrap').style.display='block';
+  document.querySelector('#fd .bottom').style.display='flex';
+  document.getElementById('end-card').style.display='none';
+  ['ok','err','info'].forEach(t=>{document.getElementById('msg-'+t).style.display='none';});
+  renderRound();
+};
+
+startGame();
+})();
+</script>
+
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-tag" data-i18n="contact_tag">// Contact</div>
+  <h2 class="section-title" data-i18n="contact_title">Let's Talk Finance Systems</h2>
+  <p class="contact-sub">
+    <span data-i18n="contact_sub">Open to Finance Systems, Finance Transformation, ERP Implementation, and Finance AI/Automation roles across North America and remote.</span>
+  </p>
+  <div class="contact-links">
+    <a href="mailto:[email removed]" class="contact-link">✉ [email removed]</a>
+    <a href="https://www.linkedin.com/in/wongjimmy/" class="contact-link" target="_blank" rel="noopener">↗ LinkedIn</a>
+    <a href="https://github.com/wongcpa" class="contact-link" target="_blank" rel="noopener">⌥ GitHub</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>Jimmy Wong, CPA (WA &amp; Canada) &nbsp;·&nbsp; wong.cpa &nbsp;·&nbsp; © <span id="yr">2026</span></p>
+</footer>
+
+<script>
+(function(){
+var I18N = {"zh": {"nav_about": "关于", "nav_projects": "项目", "nav_skills": "技能", "nav_game": "游戏", "nav_contact": "联系", "hero_eyebrow": "财务系统 · AI 自动化 · ERP", "hero_h1": "财务系统，<br>值得<br><em>信赖。</em>", "hero_tag": "注册会计师（美国华盛顿州及加拿大），为会计团队构建财务系统与 AI 自动化：ERP 实施、财务数据管道，以及减少结账手工工作的工具。", "cta_projects": "查看项目 ↓", "stat1": "年经验，涵盖会计师事务所、财富 500 强及科技企业财务", "stat2": "个 ERP 平台：Oracle、SAP S/4HANA、Workday、NetSuite、Model N、Xero", "stat3": "种工作语言：英语、中文（粤语及普通话）、日语、西班牙语、意大利语、法语", "about_tag": "// 关于", "about_identity": "构建财务系统的注册会计师。", "about_p1": "双重执照注册会计师（美国华盛顿州及加拿大），专注于会计、系统与 AI 的交汇点：设计 ERP 流程，开发数据与自动化工具，并利用 AI 加速结账、对账和分析，每项产出都经过注册会计师级别的专业判断与内控审核。", "about_p2": "工作经历包括一家<strong>全球数据存储公司</strong>（收入会计、Oracle 与 Model N ERP 转换、公司分拆期间的 SOX 合规）、<strong>亚马逊</strong>（Twitch 内容会计、SAP S/4HANA 与 NetSuite 实施测试）、<strong>Zipline</strong>（SaaS 财务运营、结账流程设计、AI 辅助预测）、<strong>Zillow</strong> 与 <strong>DaVita</strong>（企业会计顾问），以及 <strong>Crowe MacKay LLP</strong>（审计及注册会计师辅导）。", "about_p3": "专注领域：<strong>财务系统与自动化</strong>，即 ERP 设计、数据质量与内部控制决定数字是否可信的领域。兼具注册会计师专业深度、多 ERP 实施经验与实用 AI 能力，将数周的手工工作缩短为数小时。", "about_p4": "寻求财务系统、财务转型、ERP 实施及财务 AI/自动化相关职位，包括企业内部、四大咨询及实施合作伙伴。优先远程工作，尤其关注需要多语言能力的全球团队。", "projects_tag": "// 项目", "projects_title": "AI 辅助会计工具<br>为真实工作流程打造", "skills_tag": "// 技能", "skills_title": "专业能力", "game_tag": "// 波动侦探", "game_title": "你能找出<br>异常吗？", "game_sub": "真实会计场景，限时挑战。CFO 正在看着你。", "contact_tag": "// 联系", "contact_title": "聊聊财务系统", "contact_sub": "寻求北美及远程的财务系统、财务转型、ERP 实施及财务 AI/自动化职位。"}, "ja": {"nav_about": "概要", "nav_projects": "プロジェクト", "nav_skills": "スキル", "nav_game": "ゲーム", "nav_contact": "お問い合わせ", "hero_eyebrow": "財務システム · AI 自動化 · ERP", "hero_h1": "信頼できる<br>財務システムを<br><em>つくる。</em>", "hero_tag": "米国ワシントン州およびカナダの公認会計士（CPA）。会計チームのための財務システムと AI 自動化を構築しています。ERP 導入、財務データパイプライン、そして決算の手作業をなくすツール。", "cta_projects": "プロジェクトを見る ↓", "stat1": "年の経験：会計事務所、Fortune 500 企業、テック企業の財務", "stat2": "つの ERP プラットフォーム：Oracle、SAP S/4HANA、Workday、NetSuite、Model N、Xero", "stat3": "つの業務言語：英語、中国語（広東語・北京語）、日本語、スペイン語、イタリア語、フランス語", "about_tag": "// 概要", "about_identity": "財務システムをつくる CPA。", "about_p1": "米国ワシントン州とカナダの二重資格を持つ公認会計士として、会計・システム・AI の交差点で働いています。ERP プロセスの設計、データと自動化ツールの開発、AI を活用した決算・照合・分析の迅速化を行い、すべての成果物に CPA としての判断と内部統制を適用しています。", "about_p2": "経歴：<strong>グローバルデータストレージ企業</strong>（収益会計、Oracle と Model N の ERP 移行、会社分割における SOX 対応）、<strong>Amazon</strong>（Twitch のコンテンツ会計、SAP S/4HANA と NetSuite の導入テスト）、<strong>Zipline</strong>（SaaS の財務オペレーション、決算プロセス設計、AI を活用した予測）、<strong>Zillow</strong> と <strong>DaVita</strong>（企業会計コンサルティング）、<strong>Crowe MacKay LLP</strong>（監査および CPA 受験者の指導）。", "about_p3": "専門領域：<strong>財務システムと自動化</strong>。ERP 設計、データ品質、内部統制が数字の信頼性を左右する領域です。CPA としての専門性、複数 ERP の導入経験、実践的な AI 活用力を組み合わせ、数週間の手作業を数時間に短縮します。", "about_p4": "財務システム、財務トランスフォーメーション、ERP 導入、財務 AI・自動化に関するポジションを探しています（事業会社、Big 4 アドバイザリー、導入パートナー）。リモート勤務を希望し、語学力を活かせるグローバルチームに特に関心があります。", "projects_tag": "// プロジェクト", "projects_title": "実務のための<br>AI 活用会計ツール", "skills_tag": "// スキル", "skills_title": "専門分野", "game_tag": "// フラックス探偵", "game_title": "異常値を<br>見つけられますか？", "game_sub": "実際の会計シナリオ。制限時間あり。CFO が見ています。", "contact_tag": "// お問い合わせ", "contact_title": "財務システムについて話しましょう", "contact_sub": "北米およびリモートで、財務システム、財務トランスフォーメーション、ERP 導入、財務 AI・自動化のポジションを探しています。"}, "es": {"nav_about": "Perfil", "nav_projects": "Proyectos", "nav_skills": "Competencias", "nav_game": "Juego", "nav_contact": "Contacto", "hero_eyebrow": "Sistemas financieros · Automatización con IA · ERP", "hero_h1": "Sistemas financieros<br>que generan<br><em>confianza.</em>", "hero_tag": "CPA (Washington y Canadá) que diseña sistemas financieros y automatización con IA para equipos contables: implantaciones de ERP, flujos de datos financieros y herramientas que eliminan el trabajo manual del cierre.", "cta_projects": "Ver proyectos ↓", "stat1": "años en firmas de auditoría, empresas de la lista Fortune 500 y finanzas del sector tecnológico", "stat2": "plataformas ERP: Oracle, SAP S/4HANA, Workday, NetSuite, Model N, Xero", "stat3": "idiomas de trabajo: inglés, chino (cantonés y mandarín), japonés, español, italiano y francés", "about_tag": "// Perfil", "about_identity": "Un CPA que diseña sistemas financieros.", "about_p1": "CPA con doble licencia (Washington, EE. UU., y Canadá) que trabaja donde confluyen la contabilidad, los sistemas y la IA: diseña procesos de ERP, desarrolla herramientas de datos y automatización, y utiliza la IA para agilizar el cierre, las conciliaciones y el análisis, aplicando criterio profesional y controles internos a cada resultado.", "about_p2": "Experiencia en una <strong>empresa internacional de almacenamiento de datos</strong> (contabilidad de ingresos, migraciones de ERP a Oracle y Model N, SOX durante una escisión), <strong>Amazon</strong> (contabilidad de contenidos en Twitch, pruebas de implantación de SAP S/4HANA y NetSuite), <strong>Zipline</strong> (operaciones financieras en una empresa SaaS, diseño del cierre contable, previsiones apoyadas en IA), <strong>Zillow</strong> y <strong>DaVita</strong> (consultoría en contabilidad corporativa) y <strong>Crowe MacKay LLP</strong> (auditoría y mentoría de candidatos a CPA).", "about_p3": "Especialidad: <strong>sistemas financieros y automatización</strong>, donde el diseño del ERP, la calidad de los datos y los controles determinan si las cifras son fiables. Una combinación poco habitual de rigor técnico de CPA, experiencia en varias implantaciones de ERP y dominio práctico de la IA que convierte semanas de trabajo manual en horas.", "about_p4": "Abierto a puestos de sistemas financieros, transformación financiera, implantación de ERP y automatización con IA en finanzas, tanto en empresa como en firmas Big Four o partners de implantación. Preferencia por el teletrabajo, con especial interés en equipos internacionales en los que los idiomas marcan la diferencia.", "projects_tag": "// Proyectos", "projects_title": "Herramientas contables con IA<br>para procesos reales", "skills_tag": "// Competencias", "skills_title": "Especialización", "game_tag": "// Detective de variaciones", "game_title": "¿Eres capaz de detectar<br>la anomalía?", "game_sub": "Casos contables reales. Contrarreloj. El director financiero te está observando.", "contact_tag": "// Contacto", "contact_title": "Hablemos de sistemas financieros", "contact_sub": "Abierto a puestos de sistemas financieros, transformación financiera, implantación de ERP y automatización con IA en Norteamérica y en teletrabajo."}, "it": {"nav_about": "Profilo", "nav_projects": "Progetti", "nav_skills": "Competenze", "nav_game": "Gioco", "nav_contact": "Contatti", "hero_eyebrow": "Sistemi finanziari · Automazione con IA · ERP", "hero_h1": "Sistemi finanziari<br>di cui potersi<br><em>fidare.</em>", "hero_tag": "CPA (Washington e Canada) che costruisce sistemi finanziari e automazione con IA per i team contabili: implementazioni ERP, flussi di dati finanziari e strumenti che eliminano il lavoro manuale dalla chiusura.", "cta_projects": "Vedi i progetti ↓", "stat1": "anni tra revisione contabile, aziende Fortune 500 e finanza tecnologica", "stat2": "piattaforme ERP: Oracle, SAP S/4HANA, Workday, NetSuite, Model N, Xero", "stat3": "lingue di lavoro: inglese, cinese (cantonese e mandarino), giapponese, spagnolo, italiano, francese", "about_tag": "// Profilo", "about_identity": "Un CPA che costruisce sistemi finanziari.", "about_p1": "CPA con doppia abilitazione (Washington, USA e Canada) che lavora all'incrocio tra contabilità, sistemi e IA: progetta processi ERP, sviluppa strumenti di dati e automazione e usa l'IA per velocizzare chiusure, riconciliazioni e analisi, applicando giudizio professionale e controlli interni a ogni risultato.", "about_p2": "Esperienza presso un'<strong>azienda globale di archiviazione dati</strong> (contabilità dei ricavi, transizioni ERP Oracle e Model N, SOX durante uno scorporo societario), <strong>Amazon</strong> (contabilità dei contenuti di Twitch, test di implementazione SAP S/4HANA e NetSuite), <strong>Zipline</strong> (operazioni finanziarie SaaS, progettazione della chiusura, previsioni assistite dall'IA), <strong>Zillow</strong> e <strong>DaVita</strong> (consulenza in contabilità aziendale) e <strong>Crowe MacKay LLP</strong> (revisione e mentoring di candidati CPA).", "about_p3": "Focus: <strong>sistemi finanziari e automazione</strong>, dove progettazione ERP, qualità dei dati e controlli determinano se i numeri sono affidabili. Una combinazione rara di competenza tecnica da CPA, esperienza in più implementazioni ERP e padronanza pratica dell'IA, che riduce settimane di lavoro manuale a poche ore.", "about_p4": "Aperto a ruoli in sistemi finanziari, trasformazione finanziaria, implementazione ERP e automazione con IA in ambito finance, in azienda o presso società Big 4 e partner di implementazione. Preferenza per il lavoro da remoto, con particolare interesse per team globali in cui le lingue contano.", "projects_tag": "// Progetti", "projects_title": "Strumenti contabili con IA<br>per flussi di lavoro reali", "skills_tag": "// Competenze", "skills_title": "Specializzazioni", "game_tag": "// Detective degli scostamenti", "game_title": "Riesci a trovare<br>l'anomalia?", "game_sub": "Scenari contabili reali. A tempo. Il CFO ti sta guardando.", "contact_tag": "// Contatti", "contact_title": "Parliamo di sistemi finanziari", "contact_sub": "Aperto a ruoli in sistemi finanziari, trasformazione finanziaria, implementazione ERP e automazione con IA in Nord America e da remoto."}, "fr": {"nav_about": "Profil", "nav_projects": "Projets", "nav_skills": "Compétences", "nav_game": "Jeu", "nav_contact": "Contact", "hero_eyebrow": "Systèmes financiers · Automatisation par l'IA · ERP", "hero_h1": "Des systèmes financiers<br>dignes de<br><em>confiance.</em>", "hero_tag": "CPA (Washington et Canada) qui conçoit des systèmes financiers et de l'automatisation par l'IA pour les équipes comptables : implantations d'ERP, flux de données financières et outils qui éliminent le travail manuel de la clôture.", "cta_projects": "Voir les projets ↓", "stat1": "ans en cabinet d'audit, en entreprise Fortune 500 et en finance tech", "stat2": "plateformes ERP : Oracle, SAP S/4HANA, Workday, NetSuite, Model N, Xero", "stat3": "langues de travail : anglais, chinois (cantonais et mandarin), japonais, espagnol, italien, français", "about_tag": "// Profil", "about_identity": "Un CPA qui construit des systèmes financiers.", "about_p1": "CPA titulaire d'un double permis (Washington, États-Unis et Canada), au croisement de la comptabilité, des systèmes et de l'IA : conception de processus ERP, développement d'outils de données et d'automatisation, et utilisation de l'IA pour accélérer la clôture, les rapprochements et l'analyse, avec le jugement professionnel et les contrôles internes appliqués à chaque résultat.", "about_p2": "Expérience au sein d'une <strong>entreprise mondiale de stockage de données</strong> (comptabilité des revenus, transitions ERP Oracle et Model N, SOX lors d'une scission), d'<strong>Amazon</strong> (comptabilité de contenu chez Twitch, tests d'implantation SAP S/4HANA et NetSuite), de <strong>Zipline</strong> (opérations financières SaaS, conception de la clôture, prévisions assistées par l'IA), de <strong>Zillow</strong> et <strong>DaVita</strong> (conseil en comptabilité d'entreprise) et de <strong>Crowe MacKay LLP</strong> (audit et mentorat de candidats CPA).", "about_p3": "Spécialité : <strong>systèmes financiers et automatisation</strong>, là où la conception de l'ERP, la qualité des données et les contrôles déterminent si les chiffres sont fiables. Une combinaison rare de rigueur technique de CPA, d'expérience multi-ERP et de maîtrise pratique de l'IA, qui transforme des semaines de travail manuel en quelques heures.", "about_p4": "Ouvert aux postes en systèmes financiers, transformation financière, implantation d'ERP et automatisation par l'IA en finance, en entreprise ou auprès des cabinets Big 4 et des partenaires d'implantation. Télétravail privilégié, avec un intérêt particulier pour les équipes internationales où les langues comptent.", "projects_tag": "// Projets", "projects_title": "Outils comptables assistés par l'IA<br>pour des flux de travail réels", "skills_tag": "// Compétences", "skills_title": "Expertise", "game_tag": "// Détective des écarts", "game_title": "Saurez-vous repérer<br>l'anomalie ?", "game_sub": "Des cas comptables réels. Chronométrés. Le directeur financier vous observe.", "contact_tag": "// Contact", "contact_title": "Parlons systèmes financiers", "contact_sub": "Ouvert aux postes en systèmes financiers, transformation financière, implantation d'ERP et automatisation par l'IA en Amérique du Nord et en télétravail."}, "zht": {"nav_about": "關於", "nav_projects": "項目", "nav_skills": "技能", "nav_game": "遊戲", "nav_contact": "聯絡", "hero_eyebrow": "財務系統 · AI 自動化 · ERP", "hero_h1": "財務系統，<br>值得<br><em>信賴。</em>", "hero_tag": "註冊會計師（美國華盛頓州及加拿大），為會計團隊建構財務系統與 AI 自動化：ERP 實施、財務數據管道，以及減少結賬手工作業的工具。", "cta_projects": "查看項目 ↓", "stat1": "年經驗，涵蓋會計師事務所、財富 500 強及科技企業財務", "stat2": "個 ERP 平台：Oracle、SAP S/4HANA、Workday、NetSuite、Model N、Xero", "stat3": "種工作語言：英語、中文（粵語及普通話）、日語、西班牙語、意大利語、法語", "about_tag": "// 關於", "about_identity": "建構財務系統的註冊會計師。", "about_p1": "持有雙重執照的註冊會計師（美國華盛頓州及加拿大），專注於會計、系統與 AI 的交匯點：設計 ERP 流程，開發數據與自動化工具，並運用 AI 加快結賬、對賬和分析，每項成果均經過註冊會計師級別的專業判斷與內部監控審核。", "about_p2": "工作經驗包括一家<strong>全球數據儲存公司</strong>（收入會計、Oracle 與 Model N ERP 轉換、公司分拆期間的 SOX 合規）、<strong>亞馬遜</strong>（Twitch 內容會計、SAP S/4HANA 與 NetSuite 實施測試）、<strong>Zipline</strong>（SaaS 財務營運、結賬流程設計、AI 輔助預測）、<strong>Zillow</strong> 與 <strong>DaVita</strong>（企業會計顧問），以及 <strong>Crowe MacKay LLP</strong>（審計及註冊會計師考生輔導）。", "about_p3": "專注範疇：<strong>財務系統與自動化</strong>，即 ERP 設計、數據質素與內部監控決定數字是否可信的領域。兼具註冊會計師專業深度、多個 ERP 實施經驗及實用 AI 能力，將數星期的手工作業縮短至數小時。", "about_p4": "尋求財務系統、財務轉型、ERP 實施及財務 AI／自動化相關職位，包括企業內部、四大顧問及實施合作夥伴。優先考慮遙距工作，尤其希望加入重視多語能力的國際團隊。", "projects_tag": "// 項目", "projects_title": "AI 輔助會計工具<br>為真實工作流程而設", "skills_tag": "// 技能", "skills_title": "專業範疇", "game_tag": "// 波動偵探", "game_title": "你能找出<br>異常嗎？", "game_sub": "真實會計場景，限時挑戰。財務總監正看著你。", "contact_tag": "// 聯絡", "contact_title": "談談財務系統", "contact_sub": "尋求北美及遙距的財務系統、財務轉型、ERP 實施及財務 AI／自動化職位。"}};
+var nodes = Array.prototype.slice.call(document.querySelectorAll('[data-i18n]'));
+var EN = {};
+nodes.forEach(function(n){ EN[n.getAttribute('data-i18n')] = n.innerHTML; });
+function apply(lang){
+  var dict = I18N[lang] || {};
+  nodes.forEach(function(n){
+    var k = n.getAttribute('data-i18n');
+    n.innerHTML = (lang !== 'en' && dict[k]) ? dict[k] : EN[k];
+  });
+  document.documentElement.lang = ({zh:'zh-Hans', zht:'zh-Hant', es:'es-ES'})[lang] || lang;
+  document.querySelectorAll('.lang-btn').forEach(function(b){
+    b.classList.toggle('active', b.getAttribute('data-lang') === lang);
+  });
+}
+window.setLang = function(lang){
+  apply(lang);
+  try { localStorage.setItem('lang', lang); } catch(e) {}
+};
+var start = 'en';
+try {
+  var q = new URLSearchParams(location.search).get('lang');
+  start = (q && (q in I18N || q === 'en')) ? q : (localStorage.getItem('lang') || 'en');
+} catch(e) {}
+if (start !== 'en') apply(start);
+document.getElementById('yr').textContent = new Date().getFullYear();
+})();
+</script>
+</body>
+</html>
