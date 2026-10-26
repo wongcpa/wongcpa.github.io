@@ -401,6 +401,23 @@
   .card-link-gh { color: var(--muted); }
   .card-link-gh:hover { color: var(--teal); }
 
+  .card-samples, .path-links {
+    display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.35rem 0.75rem;
+    font-family: var(--mono); font-size: 0.68rem;
+  }
+  .card-samples-label {
+    letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); width: 100%;
+  }
+  .sample-link { color: var(--teal); text-decoration: none; border-bottom: 1px dotted var(--teal-lt); }
+  .sample-link:hover { border-bottom-style: solid; }
+  .sample-link-gh { color: var(--muted); border-bottom-color: var(--rule); }
+  .path-links { gap: 0.4rem; }
+  .path-link {
+    color: var(--slate); text-decoration: none; padding: 0.2rem 0.55rem;
+    border: 1px solid var(--teal-lt); border-radius: 1px; transition: all 0.15s;
+  }
+  .path-link:hover { background: var(--teal); border-color: var(--teal); color: #fff; }
+
   .privacy-badge {
     font-family: var(--mono);
     font-size: 0.6rem;
@@ -756,6 +773,14 @@
         <span class="tag">IC Elimination</span>
         <span class="tag">Python</span>
       </div>
+      <div class="card-samples">
+        <span class="card-samples-label">Sample data</span>
+        <a href="/fx-consolidation-engine/tests/fixtures/entity_a_usd.csv" class="sample-link" download>entity_a_usd.csv</a>
+        <a href="/fx-consolidation-engine/tests/fixtures/entity_b_cad.csv" class="sample-link" download>entity_b_cad.csv</a>
+        <a href="/fx-consolidation-engine/tests/fixtures/entity_c_gbp.csv" class="sample-link" download>entity_c_gbp.csv</a>
+        <a href="/fx-consolidation-engine/tests/fixtures/intercompany_eliminations.csv" class="sample-link" download>intercompany_eliminations.csv</a>
+        <a href="https://github.com/wongcpa/fx-consolidation-engine/tree/main/tests/fixtures" class="sample-link sample-link-gh" target="_blank" rel="noopener">View on GitHub ↗</a>
+      </div>
       <div class="card-footer">
         <div class="card-links">
           <a href="/fx-consolidation-engine/src/" class="card-link card-link-live" target="_blank" rel="noopener">Try it live →</a>
@@ -782,6 +807,11 @@
         <span class="tag">ITA s.67.1</span>
         <span class="tag">Sole Prop</span>
         <span class="tag">Python</span>
+      </div>
+      <div class="card-samples">
+        <span class="card-samples-label">Sample data</span>
+        <a href="/cra-expense-categorizer/tests/fixtures/bank_statement.csv" class="sample-link" download>bank_statement.csv</a>
+        <a href="https://github.com/wongcpa/cra-expense-categorizer/tree/main/tests/fixtures" class="sample-link sample-link-gh" target="_blank" rel="noopener">View on GitHub ↗</a>
       </div>
       <div class="card-footer">
         <div class="card-links">
@@ -810,6 +840,11 @@
         <span class="tag">SAP</span>
         <span class="tag">Python</span>
       </div>
+      <div class="card-samples">
+        <span class="card-samples-label">Sample data</span>
+        <a href="/contra-revenue-flux-analyzer/tests/fixtures/contra_revenue_data.csv" class="sample-link" download>contra_revenue_data.csv</a>
+        <a href="https://github.com/wongcpa/contra-revenue-flux-analyzer/tree/main/tests/fixtures" class="sample-link sample-link-gh" target="_blank" rel="noopener">View on GitHub ↗</a>
+      </div>
       <div class="card-footer">
         <div class="card-links">
           <a href="/contra-revenue-flux-analyzer/src/" class="card-link card-link-live" target="_blank" rel="noopener">Try it live →</a>
@@ -836,6 +871,11 @@
         <span class="tag">ASPE 3400</span>
         <span class="tag">Python + pdfplumber</span>
       </div>
+      <div class="card-samples">
+        <span class="card-samples-label">Sample data</span>
+        <a href="/ifrs15-contract-reviewer/tests/fixtures/sample_content_license_agreement.pdf" class="sample-link" download>sample_content_license_agreement.pdf</a>
+        <a href="https://github.com/wongcpa/ifrs15-contract-reviewer/tree/main/tests/fixtures" class="sample-link sample-link-gh" target="_blank" rel="noopener">View on GitHub ↗</a>
+      </div>
       <div class="card-footer">
         <div class="card-links">
           <a href="/ifrs15-contract-reviewer/src/" class="card-link card-link-live" target="_blank" rel="noopener">Try it live →</a>
@@ -845,134 +885,47 @@
       </div>
     </div>
 
-    <!-- Card 5a -->
+    <!-- Card 5 -->
     <div class="project-card">
       <div class="card-top">
-        <span class="card-number">05a</span>
+        <span class="card-number">05</span>
         <span class="card-type">ERP Migration</span>
       </div>
-      <div class="card-title">GL Mapping Validator: NetSuite → SAP</div>
+      <div class="card-title">GL Mapping Validator Suite</div>
       <div class="card-desc">
-        Validates a full chart of accounts mapping from NetSuite to SAP S/4HANA.
-        Flags type mismatches (B/S vs. P&L), duplicate targets, inactive accounts,
-        and unmapped actives. Produces a migration-ready CSV report.
+        Validates chart of accounts mappings across five ERP migration paths. Flags type
+        mismatches (B/S vs. P&amp;L), duplicate targets, inactive and unmapped active accounts,
+        contra revenue mapped to gross revenue, and Opening Balance Equity reclassification
+        needs. Produces a migration-ready CSV report.
+      </div>
+      <div class="path-links">
+        <a href="/gl-migration-validator-suite/src/?path=ns-sap" class="path-link" target="_blank" rel="noopener">NetSuite → SAP</a>
+        <a href="/gl-migration-validator-suite/src/?path=xero-ns" class="path-link" target="_blank" rel="noopener">Xero → NetSuite</a>
+        <a href="/gl-migration-validator-suite/src/?path=sap-oracle" class="path-link" target="_blank" rel="noopener">SAP → Oracle</a>
+        <a href="/gl-migration-validator-suite/src/?path=wd-ns" class="path-link" target="_blank" rel="noopener">Workday → NetSuite</a>
+        <a href="/gl-migration-validator-suite/src/?path=qbo-ns" class="path-link" target="_blank" rel="noopener">QBO → NetSuite</a>
       </div>
       <div class="card-tags">
         <span class="tag">NetSuite</span>
-        <span class="tag">SAP S/4HANA</span>
-        <span class="tag">COA Migration</span>
-        <span class="tag">Python</span>
-      </div>
-      <div class="card-footer">
-        <div class="card-links">
-          <a href="/gl-migration-validator-suite/src/?path=ns-sap" class="card-link card-link-live" target="_blank" rel="noopener">Try it live →</a>
-          <a href="https://github.com/wongcpa/gl-migration-validator-suite" class="card-link card-link-gh" target="_blank" rel="noopener">GitHub</a>
-        </div>
-        <span class="privacy-badge">● 100% Offline</span>
-      </div>
-    </div>
-
-    <!-- Card 5b -->
-    <div class="project-card">
-      <div class="card-top">
-        <span class="card-number">05b</span>
-        <span class="card-type">ERP Migration</span>
-      </div>
-      <div class="card-title">GL Mapping Validator: Xero → NetSuite</div>
-      <div class="card-desc">
-        Maps Xero account codes and types to NetSuite's classification structure.
-        Handles Xero-specific account types (BANK, CURRLIAB, DEPRECIATN, OVERHEADS)
-        and flags duplicate Xero codes and inactive accounts.
-      </div>
-      <div class="card-tags">
-        <span class="tag">Xero</span>
-        <span class="tag">NetSuite</span>
-        <span class="tag">SaaS Startup</span>
-        <span class="tag">Python</span>
-      </div>
-      <div class="card-footer">
-        <div class="card-links">
-          <a href="/gl-migration-validator-suite/src/?path=xero-ns" class="card-link card-link-live" target="_blank" rel="noopener">Try it live →</a>
-          <a href="https://github.com/wongcpa/gl-migration-validator-suite" class="card-link card-link-gh" target="_blank" rel="noopener">GitHub</a>
-        </div>
-        <span class="privacy-badge">● 100% Offline</span>
-      </div>
-    </div>
-
-    <!-- Card 5c -->
-    <div class="project-card">
-      <div class="card-top">
-        <span class="card-number">05c</span>
-        <span class="card-type">ERP Migration</span>
-      </div>
-      <div class="card-title">GL Mapping Validator: SAP → Oracle Fusion</div>
-      <div class="card-desc">
-        Maps SAP GL accounts (X/P type codes) to Oracle Fusion Cloud's segment-qualified
-        account structure. Validates type compatibility and flags contra revenue accounts
-        mapped to gross revenue targets.
-      </div>
-      <div class="card-tags">
         <span class="tag">SAP S/4HANA</span>
         <span class="tag">Oracle Fusion</span>
-        <span class="tag">Python</span>
-      </div>
-      <div class="card-footer">
-        <div class="card-links">
-          <a href="/gl-migration-validator-suite/src/?path=sap-oracle" class="card-link card-link-live" target="_blank" rel="noopener">Try it live →</a>
-          <a href="https://github.com/wongcpa/gl-migration-validator-suite" class="card-link card-link-gh" target="_blank" rel="noopener">GitHub</a>
-        </div>
-        <span class="privacy-badge">● 100% Offline</span>
-      </div>
-    </div>
-
-    <!-- Card 5d -->
-    <div class="project-card">
-      <div class="card-top">
-        <span class="card-number">05d</span>
-        <span class="card-type">ERP Migration</span>
-      </div>
-      <div class="card-title">GL Mapping Validator: Workday → NetSuite</div>
-      <div class="card-desc">
-        Validates Workday worktag-based account structures against NetSuite's traditional
-        GL account hierarchy. Handles Workday's dimension-driven approach vs. NetSuite's
-        segment model.
-      </div>
-      <div class="card-tags">
         <span class="tag">Workday</span>
-        <span class="tag">NetSuite</span>
-        <span class="tag">Enterprise</span>
+        <span class="tag">Xero</span>
+        <span class="tag">QBO</span>
         <span class="tag">Python</span>
+      </div>
+      <div class="card-samples">
+        <span class="card-samples-label">Sample data</span>
+        <a href="/gl-migration-validator-suite/tests/fixtures/mapping_netsuite_to_sap.csv" class="sample-link" download>mapping_netsuite_to_sap.csv</a>
+        <a href="/gl-migration-validator-suite/tests/fixtures/mapping_xero_to_netsuite.csv" class="sample-link" download>mapping_xero_to_netsuite.csv</a>
+        <a href="/gl-migration-validator-suite/tests/fixtures/mapping_sap_to_oracle.csv" class="sample-link" download>mapping_sap_to_oracle.csv</a>
+        <a href="/gl-migration-validator-suite/tests/fixtures/mapping_workday_to_netsuite.csv" class="sample-link" download>mapping_workday_to_netsuite.csv</a>
+        <a href="/gl-migration-validator-suite/tests/fixtures/mapping_qbo_to_netsuite.csv" class="sample-link" download>mapping_qbo_to_netsuite.csv</a>
+        <a href="https://github.com/wongcpa/gl-migration-validator-suite/tree/main/tests/fixtures" class="sample-link sample-link-gh" target="_blank" rel="noopener">View on GitHub ↗</a>
       </div>
       <div class="card-footer">
         <div class="card-links">
-          <a href="/gl-migration-validator-suite/src/?path=wd-ns" class="card-link card-link-live" target="_blank" rel="noopener">Try it live →</a>
-          <a href="https://github.com/wongcpa/gl-migration-validator-suite" class="card-link card-link-gh" target="_blank" rel="noopener">GitHub</a>
-        </div>
-        <span class="privacy-badge">● 100% Offline</span>
-      </div>
-    </div>
-
-    <!-- Card 5e -->
-    <div class="project-card">
-      <div class="card-top">
-        <span class="card-number">05e</span>
-        <span class="card-type">ERP Migration</span>
-      </div>
-      <div class="card-title">GL Mapping Validator: QBO → NetSuite</div>
-      <div class="card-desc">
-        Maps QuickBooks Online's account structure to NetSuite for growing businesses
-        transitioning from SMB to enterprise. Flags Opening Balance Equity reclassification
-        needs and uncategorized expense accounts.
-      </div>
-      <div class="card-tags">
-        <span class="tag">QuickBooks Online</span>
-        <span class="tag">NetSuite</span>
-        <span class="tag">SMB Growth</span>
-        <span class="tag">Python</span>
-      </div>
-      <div class="card-footer">
-        <div class="card-links">
-          <a href="/gl-migration-validator-suite/src/?path=qbo-ns" class="card-link card-link-live" target="_blank" rel="noopener">Try it live →</a>
+          <a href="/gl-migration-validator-suite/src/" class="card-link card-link-live" target="_blank" rel="noopener">Try it live →</a>
           <a href="https://github.com/wongcpa/gl-migration-validator-suite" class="card-link card-link-gh" target="_blank" rel="noopener">GitHub</a>
         </div>
         <span class="privacy-badge">● 100% Offline</span>
