@@ -612,6 +612,14 @@
   #fd .cfо-track { flex: 1; height: 6px; background: var(--rule); border-radius: 3px; overflow: hidden; }
   #fd .cfо-fill { height: 100%; background: var(--teal); border-radius: 3px; transition: width 1s linear; }
   #fd .cfо-fill.danger { background: #dc2626; }
+  /* ── SECRET LEVEL: MONTH-END DASH ── */
+  #fd .secret { display: none; }
+  #fd .secret-badge { font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: #fff; background: var(--slate); padding: 3px 8px; border-radius: 2px; }
+  #fd .secret h3 { font-family: var(--serif); font-size: 1.25rem; color: var(--slate); margin: 10px 0 4px; }
+  #fd .secret p { font-size: 0.8rem; color: var(--muted); margin: 0 0 12px; line-height: 1.55; }
+  #fd .secret canvas { display: block; width: 100%; height: auto; aspect-ratio: 720 / 200; border: 1px solid var(--rule); border-radius: 4px; cursor: pointer; touch-action: manipulation; }
+  #fd .secret-foot { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-top: 12px; }
+  #fd .secret-foot span { font-family: var(--mono); font-size: 0.72rem; color: var(--muted); flex: 1; }
   @media (max-width: 600px) {
     #game { padding: 4rem 1.5rem; }
     .game-shell { padding: 1.25rem; }
@@ -1029,6 +1037,17 @@
         <button class="gbtn" onclick="skipRound()">Skip</button>
       </div>
 
+      <div class="secret" id="secret">
+        <span class="secret-badge">&#128275; Secret level</span>
+        <h3>Month-End Dash</h3>
+        <p>Three anomalies caught. The books close at midnight: jump the late invoices and unreconciled stacks, and watch for audit queries. Space, &uarr; or tap to jump.</p>
+        <canvas id="dash" aria-label="Month-End Dash mini game"></canvas>
+        <div class="secret-foot">
+          <span id="dash-foot">Best this visit: $0 · Bonus +0 pts</span>
+          <button class="gbtn gbtn-primary" onclick="leaveSecret()">Back to Flux Detective &rarr;</button>
+        </div>
+      </div>
+
       <div class="end-card" id="end-card">
         <div style="font-family:var(--mono);font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:4px;">Final Score</div>
         <div class="score-final" id="final-score">0</div>
@@ -1044,6 +1063,7 @@
 const ROUNDS=[{level:"Analyst",time:25,label:"Identify the account with an unusual MoM swing",rows:[{acct:"4000 — Product Revenue",prior:18420,curr:19100},{acct:"4100 — Service Revenue",prior:6200,curr:6450},{acct:"4900 — Contra Rev — Rebates",prior:1820,curr:1950},{acct:"5000 — Cost of Revenue",prior:7800,curr:8100},{acct:"5100 — Mfg Overhead",prior:2100,curr:9800,anomaly:true},{acct:"6000 — Salaries & Wages",prior:4200,curr:4350},{acct:"6100 — Rent & Occupancy",prior:1500,curr:1500}],explanation:"Mfg Overhead jumped 367% with no corresponding revenue increase — classic Model N batch error or misposted accrual."},{level:"Analyst",time:22,label:"One contra-revenue line moved in the wrong direction",rows:[{acct:"4000 — Product Revenue",prior:22100,curr:24600},{acct:"4100 — Service Revenue",prior:5800,curr:6100},{acct:"4900 — Rebates & Incentives",prior:2100,curr:1050,anomaly:true},{acct:"4901 — Price Protection",prior:980,curr:1020},{acct:"4902 — Returns & Allowances",prior:650,curr:710},{acct:"5000 — Cost of Revenue",prior:9200,curr:10100},{acct:"6000 — Salaries & Wages",prior:4400,curr:4550}],explanation:"Rebates & Incentives dropped 50% as revenue grew 11%. Contra revenue should scale with revenue — this suggests a reserve underaccrual or system miscalculation."},{level:"Senior",time:20,label:"Revenue grew, but something in COGS doesn't add up",rows:[{acct:"4000 — Product Revenue",prior:31000,curr:38000},{acct:"4100 — Service Revenue",prior:7200,curr:7600},{acct:"4900 — SPA Contra Revenue",prior:3100,curr:3900},{acct:"5000 — Cost of Revenue",prior:12800,curr:13400},{acct:"5100 — Royalty Expense",prior:1900,curr:1920},{acct:"5200 — Content Amortization",prior:4200,curr:14700,anomaly:true},{acct:"6200 — G&A Expense",prior:2100,curr:2180}],explanation:"Content Amortization jumped 250% while revenue grew 23%. Likely a bulk amortization catch-up posting or ERP migration cutover error."},{level:"Senior",time:18,label:"Spot the account that moved against the trend",rows:[{acct:"4000 — Streaming Revenue",prior:15200,curr:14100},{acct:"4100 — Licensing Revenue",prior:8900,curr:8200},{acct:"4900 — Variable Consideration",prior:1400,curr:1310},{acct:"5000 — Content Costs",prior:9800,curr:9100},{acct:"6000 — Headcount",prior:5200,curr:5350,anomaly:true},{acct:"6100 — Tech & Infrastructure",prior:2800,curr:2600},{acct:"6300 — Professional Fees",prior:1100,curr:1020}],explanation:"Everything declined MoM but Headcount expense increased. Likely a payroll true-up or bonus accrual hitting the wrong period."},{level:"Manager",time:16,label:"One line is statistically impossible given the business context",rows:[{acct:"4000 — Product Revenue",prior:44200,curr:45100},{acct:"4900 — Rebates",prior:3800,curr:3870},{acct:"4901 — Price Protection",prior:1200,curr:1230},{acct:"4902 — Ship & Debit",prior:980,curr:1010},{acct:"4903 — SPA Adjustments",prior:2100,curr:-1850,anomaly:true},{acct:"5000 — COGS",prior:18400,curr:18800},{acct:"6000 — Opex",prior:9200,curr:9300}],explanation:"SPA Adjustments flipped from a debit to a credit balance — a sign flip in a contra revenue account. Clear GL mapping error from an ERP migration cutover."},{level:"Manager",time:14,label:"Final round — spot the one real anomaly",rows:[{acct:"4000 — Revenue",prior:52000,curr:58000},{acct:"4900 — Contra Revenue",prior:5200,curr:5800},{acct:"5000 — COGS",prior:21000,curr:23400},{acct:"6000 — R&D Expense",prior:6800,curr:7200},{acct:"6100 — S&M Expense",prior:4900,curr:7900,anomaly:true},{acct:"6200 — G&A Expense",prior:2800,curr:3100},{acct:"7000 — Interest Income",prior:340,curr:290}],explanation:"S&M Expense jumped 61% while revenue grew 12% and all other opex grew proportionally — likely a misposted commission batch or accrual hitting the wrong period."}];
 
 let current=0,score=0,streak=0,timerInterval=null,timeLeft=0,hintUsed=false,roundDone=false;
+let correctCount=0,secretPlayed=false,dashRunBest=0;
 
 function fmt(n){return'$'+Math.abs(n).toLocaleString();}
 function pct(p,c){if(p===0)return'N/A';const v=((c-p)/Math.abs(p))*100;return(v>=0?'+':'')+v.toFixed(1)+'%';}
@@ -1120,7 +1140,7 @@ function pick(div,isAnomaly){
   const timeBonus=Math.floor(timeLeft/5);
   if(isAnomaly){
     const pts=10+timeBonus+(hintUsed?0:2);
-    score+=pts;streak++;
+    score+=pts;streak++;correctCount++;
     updateScore();updateStreak();
     div.classList.add('correct');
     const bonusNote=streak>1?' (+'+streak+'x streak!)':'';
@@ -1134,7 +1154,13 @@ function pick(div,isAnomaly){
     document.getElementById('anomaly-note').textContent='Anomaly: '+r.rows.find(x=>x.anomaly).acct;
     document.getElementById('cfo-emoji').textContent='😡';
   }
-  setTimeout(nextRound,3200);
+  if(isAnomaly&&correctCount===3&&!secretPlayed){
+    secretPlayed=true;
+    setTimeout(()=>showMsg('info','🔓 Three anomalies caught… something just unlocked.'),1200);
+    setTimeout(openSecret,3600);
+  } else {
+    setTimeout(nextRound,3200);
+  }
 }
 
 function revealAnomaly(){
@@ -1196,7 +1222,8 @@ function endGame(){
 }
 
 window.startGame=function(){
-  current=0;score=0;streak=0;
+  current=0;score=0;streak=0;correctCount=0;secretPlayed=false;
+  dash.close();document.getElementById('secret').style.display='none';
   updateScore();updateStreak();clearInterval(timerInterval);
   document.getElementById('report-wrap').style.display='block';
   document.querySelector('#fd .bottom').style.display='flex';
@@ -1205,7 +1232,161 @@ window.startGame=function(){
   renderRound();
 };
 
-startGame();
+// ── SECRET LEVEL: MONTH-END DASH ─────────────────────────────────────────
+// A runner in the spirit of the offline dinosaur game: jump the paperwork.
+const dash=(function(){
+  const cv=document.getElementById('dash'),ctx=cv.getContext('2d');
+  const W=720,H=200,GROUND=H-34,GRAVITY=0.9,JUMP_V=-13;
+  const C={slate:'#0F2A3D',gold:'#7A5F2C',goldHi:'#C9A45C',paper:'#F6F6F4',rule:'#d1cdc4',muted:'#6b7280',red:'#b91c1c'};
+  const LABELS=['LATE INVOICE','UNRECONCILED','SUSPENSE','WRITE-OFF','MISSING RECEIPT','ACCRUAL'];
+  let state='idle',raf=null,last=0,speed,dist,groundOff,player,obstacles,nextGap,best=0,onOver=null;
+  try{best=+localStorage.getItem('fdDashBest')||0}catch(e){}
+
+  const points=()=>Math.floor(dist/40);
+  const money=p=>'$'+(p*100).toLocaleString('en-US');
+
+  function reset(){
+    speed=6;dist=0;groundOff=0;obstacles=[];nextGap=320;
+    player={x:56,y:GROUND-40,w:32,h:40,vy:0,onGround:true,leg:0};
+  }
+  function spawn(){
+    if(points()>300&&Math.random()<0.3){
+      const high=Math.random()<0.5; // high ones pass overhead, low ones must be jumped
+      obstacles.push({kind:'fly',x:W+20,w:34,h:22,y:high?GROUND-86:GROUND-52,label:'AUDIT QUERY'});
+    } else {
+      const h=8+(2+Math.floor(Math.random()*4))*8, w=22+Math.floor(Math.random()*14);
+      obstacles.push({kind:'stack',x:W+20,w,h,y:GROUND-h,label:LABELS[Math.floor(Math.random()*LABELS.length)],red:Math.random()<0.35});
+    }
+    nextGap=240+speed*22+Math.random()*220;
+  }
+  function update(dt){
+    speed=Math.min(13,speed+0.0018*dt);
+    const dx=speed*dt;
+    dist+=dx;groundOff=(groundOff+dx)%24;
+    player.vy+=GRAVITY*dt;player.y+=player.vy*dt;
+    if(player.y>=GROUND-player.h){player.y=GROUND-player.h;player.vy=0;player.onGround=true;}
+    player.leg+=dt*0.25*speed/6;
+    obstacles.forEach(o=>{o.x-=dx*(o.kind==='fly'?1.15:1)});
+    obstacles=obstacles.filter(o=>o.x+o.w>-10);
+    nextGap-=dx;if(nextGap<=0)spawn();
+    const p={x:player.x+5,y:player.y+4,w:player.w-10,h:player.h-6};
+    if(obstacles.some(o=>p.x<o.x+o.w-3&&p.x+p.w>o.x+3&&p.y<o.y+o.h-2&&p.y+p.h>o.y+2)){
+      state='over';
+      if(points()>best){best=points();try{localStorage.setItem('fdDashBest',best)}catch(e){}}
+      onOver&&onOver(points());
+    }
+  }
+  function rrect(x,y,w,h,r,fill){ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath();ctx.fillStyle=fill;ctx.fill();}
+  function drawPlayer(){
+    const {x,y,w,h}=player, s=player.onGround?Math.sin(player.leg)*5:2;
+    ctx.strokeStyle=C.slate;ctx.lineWidth=3;ctx.lineCap='round';
+    ctx.beginPath();ctx.moveTo(x+10,y+h-6);ctx.lineTo(x+10+s,y+h);ctx.moveTo(x+w-10,y+h-6);ctx.lineTo(x+w-10-s,y+h);ctx.stroke();
+    rrect(x,y,w,h-6,4,C.slate);
+    ctx.fillStyle=C.goldHi;ctx.fillRect(x+4,y+4,w-8,9);
+    ctx.fillStyle=C.slate;ctx.font='700 8px "IBM Plex Mono",monospace';ctx.textAlign='right';ctx.fillText('$',x+w-6,y+11.5);
+    ctx.fillStyle='rgba(255,255,255,0.75)';
+    for(let r=0;r<3;r++)for(let c=0;c<3;c++)ctx.fillRect(x+5+c*8,y+17+r*6,5,3);
+  }
+  function drawObstacle(o){
+    ctx.lineWidth=1;
+    if(o.kind==='stack'){
+      ctx.strokeStyle=o.red?C.red:C.slate;ctx.fillStyle=o.red?'#fde2e2':'#fff';
+      for(let i=0;i<o.h;i+=8){const off=(i/8)%2?2:0;ctx.fillRect(o.x+off,o.y+i,o.w-2,7);ctx.strokeRect(o.x+off+.5,o.y+i+.5,o.w-3,6);}
+    } else {
+      ctx.fillStyle='#fff';ctx.strokeStyle=C.slate;ctx.fillRect(o.x,o.y,o.w,o.h);ctx.strokeRect(o.x+.5,o.y+.5,o.w-1,o.h-1);
+      ctx.beginPath();ctx.moveTo(o.x,o.y);ctx.lineTo(o.x+o.w/2,o.y+o.h/2);ctx.lineTo(o.x+o.w,o.y);ctx.stroke();
+    }
+    ctx.font='600 8px "IBM Plex Mono",monospace';ctx.textAlign='center';
+    ctx.fillStyle=o.red||o.kind==='fly'?C.red:C.muted;ctx.fillText(o.label,o.x+o.w/2,o.y-5);
+  }
+  function banner(title,sub){
+    ctx.fillStyle='rgba(246,246,244,0.9)';ctx.fillRect(W/2-190,H/2-44,380,70);
+    ctx.textAlign='center';ctx.fillStyle=C.slate;ctx.font='700 20px Sora,system-ui,sans-serif';ctx.fillText(title,W/2,H/2-14);
+    ctx.fillStyle=C.muted;ctx.font='12px "IBM Plex Mono",monospace';ctx.fillText(sub,W/2,H/2+10);
+  }
+  function draw(){
+    ctx.fillStyle=C.paper;ctx.fillRect(0,0,W,H);
+    ctx.strokeStyle='rgba(15,42,61,0.06)';ctx.lineWidth=1;
+    for(let y=24;y<GROUND;y+=22){ctx.beginPath();ctx.moveTo(0,y+.5);ctx.lineTo(W,y+.5);ctx.stroke();}
+    ctx.strokeStyle=C.slate;ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(0,GROUND+1);ctx.lineTo(W,GROUND+1);ctx.stroke();
+    ctx.fillStyle=C.rule;for(let x=-groundOff;x<W;x+=24)ctx.fillRect(x,GROUND+8,10,2);
+    obstacles.forEach(drawObstacle);
+    drawPlayer();
+    ctx.textAlign='right';ctx.font='600 12px "IBM Plex Mono",monospace';
+    ctx.fillStyle=C.slate;ctx.fillText('RECONCILED '+money(points()),W-14,22);
+    ctx.fillStyle=C.muted;ctx.fillText('BEST '+money(best),W-14,40);
+    if(state==='ready')banner('MONTH-END DASH','Press Space or tap to start');
+    if(state==='over')banner('CLOSE MISSED','Reconciled '+money(points())+' · Space or tap to retry');
+  }
+  function loop(t){
+    const dt=Math.min(3,(t-last)/16.667);last=t;
+    if(state==='run')update(dt);
+    draw();
+    if(state==='run')raf=requestAnimationFrame(loop);
+  }
+  function jump(){
+    if(state==='ready'||state==='over'){reset();state='run';last=performance.now();raf=requestAnimationFrame(loop);return;}
+    if(state==='run'&&player.onGround){player.vy=JUMP_V;player.onGround=false;}
+  }
+  document.addEventListener('keydown',e=>{
+    if(state==='idle')return;
+    const r=cv.getBoundingClientRect();
+    if(r.bottom<0||r.top>window.innerHeight)return; // leave Space for page scrolling when off screen
+    if(e.code==='Space'||e.code==='ArrowUp'){e.preventDefault();jump();}
+  });
+  cv.addEventListener('pointerdown',e=>{e.preventDefault();jump();});
+  return{
+    open(cb){
+      onOver=cb;const dpr=window.devicePixelRatio||1;
+      cv.width=W*dpr;cv.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);
+      reset();state='ready';draw();
+    },
+    close(){cancelAnimationFrame(raf);state='idle';},
+  };
+})();
+
+const dashBonus=()=>Math.min(10,Math.floor(dashRunBest/25)); // +1 pt per $2,500 reconciled, max 10
+
+function updateDashFoot(){
+  const bonus=dashBonus();
+  document.getElementById('dash-foot').textContent='Best this visit: $'+(dashRunBest*100).toLocaleString('en-US')+' · Bonus +'+bonus+' pts';
+}
+
+function openSecret(){
+  ['ok','err','info'].forEach(t=>{document.getElementById('msg-'+t).style.display='none';});
+  document.getElementById('report-wrap').style.display='none';
+  document.querySelector('#fd .bottom').style.display='none';
+  document.getElementById('anomaly-note').textContent='';
+  document.getElementById('level-badge').textContent='Level: ???';
+  document.getElementById('round-label').textContent='Secret level unlocked';
+  document.getElementById('timer').textContent='—';
+  document.getElementById('cfo-emoji').textContent='🤫';
+  document.getElementById('secret').style.display='block';
+  dashRunBest=0;updateDashFoot();
+  dash.open(pts=>{dashRunBest=Math.max(dashRunBest,pts);updateDashFoot();});
+}
+
+window.leaveSecret=function(){
+  dash.close();
+  const bonus=dashBonus();
+  if(bonus){score+=bonus;updateScore();}
+  document.getElementById('secret').style.display='none';
+  document.getElementById('report-wrap').style.display='block';
+  document.querySelector('#fd .bottom').style.display='flex';
+  nextRound();
+  if(bonus&&current<ROUNDS.length)showMsg('info','Month-End Dash bonus: +'+bonus+' pts');
+};
+
+// Start the timed game only once it scrolls into view, so early rounds don't expire unseen.
+const gameSection=document.getElementById('game');
+if('IntersectionObserver' in window){
+  const io=new IntersectionObserver(entries=>{
+    if(entries.some(e=>e.isIntersecting)){io.disconnect();startGame();}
+  },{threshold:0.3});
+  io.observe(gameSection);
+} else {
+  startGame();
+}
 })();
 </script>
 
