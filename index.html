@@ -269,28 +269,6 @@
   .about-body { color: var(--muted); line-height: 1.85; font-weight: 300; }
   .about-body p + p { margin-top: 1.25rem; }
 
-  .erp-grid {
-    display: grid;
-    grid-column: 1 / -1;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 1px;
-    background: var(--rule);
-    border: 1px solid var(--rule);
-  }
-
-  .erp-cell {
-    background: var(--paper);
-    padding: 1rem;
-    text-align: center;
-    font-family: var(--mono);
-    font-size: 0.75rem;
-    letter-spacing: 0.04em;
-    color: var(--slate);
-    font-weight: 500;
-    transition: background 0.2s, color 0.2s;
-  }
-  .erp-cell:hover { background: var(--teal); color: #fff; }
-
   /* ── PROJECTS ── */
   #projects { background: var(--paper); }
 
@@ -540,13 +518,11 @@
     section { padding: 4rem 1.5rem; }
     .skills-layout { grid-template-columns: 1fr 1fr; }
     .projects-grid { grid-template-columns: 1fr; }
-    .erp-grid { grid-template-columns: repeat(3,1fr); }
   }
 
   @media (max-width: 600px) {
     .nav-links { display: none; }
     .skills-layout { grid-template-columns: 1fr; }
-    .erp-grid { grid-template-columns: repeat(2,1fr); }
   }
 
   /* ── GAME SECTION ── */
@@ -728,20 +704,6 @@
       <p>
         <span data-i18n="about_p2">Experience spans a <strong>global data storage company</strong> (revenue accounting, Oracle and Model N ERP transitions, SOX through a company separation), <strong>Amazon</strong> (Twitch content accounting, SAP S/4HANA and NetSuite implementation testing), <strong>Zipline</strong> (SaaS finance operations, close design, AI-assisted forecasting), <strong>Zillow</strong> and <strong>DaVita</strong> (corporate accounting consulting), and <strong>Crowe MacKay LLP</strong> (audit and CPA mentorship).</span>
       </p>
-    </div>
-    <div class="erp-grid">
-      <div class="erp-cell">Xero</div>
-      <div class="erp-cell">NetSuite</div>
-      <div class="erp-cell">SAP S/4</div>
-      <div class="erp-cell">Oracle Fusion</div>
-      <div class="erp-cell">Workday</div>
-      <div class="erp-cell">QBO</div>
-      <div class="erp-cell">Model N</div>
-      <div class="erp-cell">Claude AI</div>
-      <div class="erp-cell">Copilot</div>
-      <div class="erp-cell">ChatGPT</div>
-      <div class="erp-cell">Power BI</div>
-      <div class="erp-cell">Python</div>
     </div>
   </div>
 </section>
